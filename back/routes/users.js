@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+
+var sample_users = {
+  "data": [    {
+      "name": "田中太郎",
+      "books": ["Githubについて", "アジャイル開発について"],
+      "skils": ["Github", "アジャイル"]
+    }]
+};
+
+/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.json(sample_users);
 });
 
 module.exports = router;
