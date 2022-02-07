@@ -27,18 +27,22 @@
 </template>
 
 <script>
+import axios from 'axios'
+
   // ここでデータを作成
+/*
   const users = [
           { name: "Aさん", books: ["Githubについて", "アジャイル開発について"], skills: ["Github", "アジャイル"] },
           { name: "Bさん", books: ["Githubについて", "その他開発", "小説A"], skills: ["アジャイル", "AWS"] }
         ]
+*/
 
   // Webページ上のデータや操作の埋込
   export default {
     // データの設定
     data(){
       return {
-        users: users,
+        users: null,
         search: ''
       }
     },
@@ -70,6 +74,13 @@
               user.skills.join(" ").includes(this.search)
           })
       }
+    },
+
+    mounted() {
+      axios.get('http://localhost:3000/users')
+      .then(response => {
+          this.users = response.data.data
+          })
     }
   };
 </script>
