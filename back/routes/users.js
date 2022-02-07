@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-/*
 var test_users_list = {
   "1": require('../test/users/test1.json'),
   "2": require('../test/users/test2.json'),
@@ -9,7 +8,6 @@ var test_users_list = {
   "4": require('../test/users/test4.json'),
   "5": require('../test/users/test5.json')
 }
-*/
 
 var sample_users = {
   "data": [    {
