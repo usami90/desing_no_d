@@ -4,19 +4,19 @@
         "userid": "0001",
         "name": "田中太郎",
         "books": ["Githubについて", "アジャイル開発について"],
-        "skils": ["Java", "アジャイル"]
+        "skills": ["Java", "アジャイル"]
         },
         {
             "userid": "0002",
             "name": "田中次郎",
             "books": [],
-            "skils": ["DB", "アジャイル"]
+            "skills": ["DB", "アジャイル"]
         },
         {
             "userid": "0003",
             "name": "鈴木三郎",
             "books": ["Githubについて", "スクラムについて"],
-            "skils": ["Github"]
+            "skills": ["Github"]
         }
     ]
 }
