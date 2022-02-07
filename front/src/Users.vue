@@ -13,7 +13,7 @@
         <tr v-for="(user, index) in search_users" :key="index">
           <td v-html="highLight(user.name)"></td>
           <td>
-            <li v-for="(skill, index) in user.skils" :key="index" v-html="highLight(skill)">
+            <li v-for="(skill, index) in user.skills" :key="index" v-html="highLight(skill)">
             </li>
           </td>
           <td>
@@ -63,7 +63,7 @@ import axios from 'axios'
           return this.users.filter(user => {
               return user.name.includes(this.search) ||
               user.books.join(" ").includes(this.search) ||
-              user.skils.join(" ").includes(this.search)
+              user.skills.join(" ").includes(this.search)
           })
       }
     },

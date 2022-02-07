@@ -6,7 +6,7 @@ var sample_users = {
   "data": [    {
       "name": "田中太郎",
       "books": ["Githubについて", "アジャイル開発について"],
-      "skils": ["Github", "アジャイル"]
+      "skills": ["Github", "アジャイル"]
     }]
 };
 
