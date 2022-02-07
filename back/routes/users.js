@@ -12,6 +12,7 @@ var sample_users = {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   res.json(sample_users);
 });
 
