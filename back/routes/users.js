@@ -16,12 +16,13 @@ var sample_users = {
       "id": "1",
       "name": "田中太郎",
       "books": ["Githubについて", "アジャイル開発について"],
-      "skils": ["Github", "アジャイル"]
+      "skills": ["Github", "アジャイル"]
     }]
 };
 
 /* GET Users */
 router.get('/', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   res.json(sample_users);
 });
 
@@ -29,6 +30,7 @@ router.get('/', function(req, res, next) {
 /* GET Test Users */
 router.get('/:test', function(req, res, next) {
   var test_users = test_users_list[req.params.test]
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   res.json(test_users);
 });
 
