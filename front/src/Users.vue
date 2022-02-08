@@ -17,8 +17,12 @@
             </li>
           </td>
           <td>
-            <li v-for="(book, index) in user.books" :key="index" v-html="highLight(book)">
+          <div  v-for="(book, index) in user.books" :key="index" >
+            <li v-html="highLight(book.title)">
             </li>
+            <p> {{book.comment}}
+            </p>
+           </div> 
           </td>          
         </tr>
       </tbody>
