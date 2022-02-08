@@ -30,8 +30,15 @@ VALUES (
 
 INSERT INTO library.user ( user_name, books, skills )
 VALUES (
-    '中央空文字データ',
+    '中央空データ',
     'アジャイル開発について:良かった,:,WF開発について:PMO上級向け',
+    'アジャイル,Github'
+);
+
+INSERT INTO library.user ( user_name, books, skills )
+VALUES (
+    '本空文字データ',
+    'アジャイル開発について:良かった,:初心者向け,WF開発について:PMO上級向け',
     'アジャイル,Github'
 );
 
