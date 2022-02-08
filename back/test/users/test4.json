@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+        "userid": "0001",
+        "name": "田中太郎",
+        "books": ["Githubについて", "アジャイル開発について"],
+        "skills": ["Java", "アジャイル"]
+        },
+        {
+            "userid": "0002",
+            "name": "田中次郎",
+            "books": [],
+            "skills": ["DB", "アジャイル"]
+        },
+        {
+            "userid": "0003",
+            "name": "鈴木三郎",
+            "books": ["Githubについて", "スクラムについて"],
+            "skills": ["Github"]
+        }
+    ]
+}
