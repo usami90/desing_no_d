@@ -1,6 +1,0 @@
-CREATE DATABASE `library` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-CREATE TABLE library.user(user_id VARCHAR(4) NOT NULL PRIMARY KEY,
-    user_name VARCHAR(100) NOT NULL,
-    book VARCHAR(1000),
-    skill VARCHAR(1000)
-    );
