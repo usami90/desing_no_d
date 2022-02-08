@@ -23,7 +23,8 @@ connection.connect((err) => {
 function doQuery(sql){
   return new Promise((resolve, result) => {
     connection.query(sql, (err, result) => {
-      return resolve(result);
+      console.log(result);
+      resolve(result); // デバッグ用コンソール出力
     })
   }).catch('error', (err) =>  reject(err))
 }
