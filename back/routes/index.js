@@ -27,7 +27,7 @@ router.get("/", (req, res, next) => {
     });
 
     var skill_sql = "SELECT * FROM skill;";
-    var skills = doQuery(skill_sql);
+    var skills = await doQuery(skill_sql);
 
     res.json({ data: { users: users, skills: skills } });
   })().catch(next);
