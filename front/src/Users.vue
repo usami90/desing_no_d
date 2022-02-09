@@ -39,13 +39,6 @@
 <script>
 import axios from 'axios'
 
-  // #12ではこのDBで取得したスキルマップを配列形式に変換すること。
-  const allSkills = [ {"id":1, "name":"アジャイル"},
-                      {"id":2, "name":"Github"},
-                      {"id":3, "name":"WF"},
-                      {"id":4, "name":"JavaScript"},
-                      {"id":5, "name":"Python"}]
-
   // Webページ上のデータや操作の埋込
   export default {
     // データの設定
@@ -53,7 +46,7 @@ import axios from 'axios'
       return {
         users: null,
         search: '',
-        allSkills: allSkills,
+        allSkills: null,
         skillSearch: ''
       }
     },
@@ -107,7 +100,8 @@ import axios from 'axios'
     mounted() {
       axios.get('http://localhost:3000')
       .then(response => {
-          this.users = response.data.data
+          this.users = response.data.data.users;
+          this.allSkills = response.data.data.skills;
           })
     }
   };
