@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div>検索：<input type="text" v-model="search"></div>
       <div>スキル検索：
         <select v-model="skillSearch">
           <option> </option>
           <option v-for="(skill, index) in allSkills" :key="index">{{skill.name}}</option>
         </select>
       </div>
+    <div>全文検索：<input type="text" v-model="search"></div>  
     <table>
       <thead>
         <tr>
@@ -29,7 +29,7 @@
             <p style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
             </p>
            </div> 
-          </td>          
+          </td>    
         </tr>
       </tbody>
     </table>

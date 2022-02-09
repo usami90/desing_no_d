@@ -1,6 +1,6 @@
-delete from library.skills;
+delete from library.skill;
 
-INSERT INTO library.skills (name) VALUES
+INSERT INTO library.skill (name) VALUES
 ('アジャイル'),
 ('ウォーターフォール'),
 ('Github'),
