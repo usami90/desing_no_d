@@ -18,15 +18,21 @@ router.get("/", (req, res, next) => {
     var sql = "SELECT * FROM user;";
     var result = await db.doQuery(sql);
     var data = result.map( (user) => {
+      book = user.book.split(",").map( (book) => {
+        bookinfo = book.split(":");
+        return {
+          "title": bookinfo[0],
+          "comment": bookinfo[1]
+        }
+      })
       return {
         "userid": user.user_id,
         "name": user.user_name,
-        "books": user.book.split(','),
-        "skills": user.skill.split(',')
-      } 
-    });
-    console.log(data);
-    res.json({"data": data});
+        "book": book,
+        "skill": user.skill.split(",")
+      }
+    })
+    res.json({ "data": data });
   })().catch(next);
 });
 
