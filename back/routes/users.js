@@ -13,6 +13,7 @@ var test_users_list = {
 
 /* GET Users from DB */
 router.get("/", (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
   (async () => {
     var sql = "SELECT * FROM user;";
     var result = await db.doQuery(sql);
@@ -31,7 +32,7 @@ router.get("/", (req, res, next) => {
         "skill": user.skill.split(",")
       }
     })
-    res.json({ data: data });
+    res.json({ "data": data });
   })().catch(next);
 });
 
