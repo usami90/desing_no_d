@@ -1,21 +1,15 @@
 var express = require("express");
 var router = express.Router();
 
-var db = require("./models/database");
-var sample_skills = [
-  { id: 1, name: "アジャイル" },
-  { id: 2, name: "Github" },
-  { id: 3, name: "オラクル" },
-  { id: 4, name: "デザイン" },
-];
+const { doQuery } = require("./models/database");
 
-/* GET Users from DB */
+/* GET Users and Skills from DB */
 router.get("/", (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
   (async () => {
-    var sql = "SELECT * FROM user;";
-    var result = await db.doQuery(sql);
-    var users = result.map((user) => {
+    var user_sql = "SELECT * FROM user;";
+    var user_result = await doQuery(user_sql);
+    var users = user_result.map((user) => {
       book = user.books.split(",").map((book) => {
         bookinfo = book.split(":");
         return {
@@ -24,13 +18,17 @@ router.get("/", (req, res, next) => {
         };
       });
       return {
-        userid: user.user_id,
-        name: user.user_name,
+        userid: user.id,
+        name: user.name,
         books: book,
         skills: user.skills.split(","),
       };
     });
-    res.json({ data: { users: users, skills: sample_skills } });
+
+    var skill_sql = "SELECT * FROM skill;";
+    var skills = await doQuery(skill_sql);
+
+    res.json({ data: { users: users, skills: skills } });
   })().catch(next);
 });
 
