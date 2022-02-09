@@ -3,19 +3,40 @@
         {
         "userid": "0001",
         "name": "田中太郎",
-        "books": ["Githubについて", "アジャイル開発について"],
+        "books": [
+            {"title":"Githubについて",
+            "comment":"アジャイル開発について"
+            },
+            {"title":"アジャイル開発",
+                "comment":"初心者向け"
+            }
+        ],
         "skills": ["Java", "アジャイル"]
         },
         {
             "userid": "0002",
             "name": "田中次郎",
-            "books": ["オラクルについて"],
+            "books": [
+                {"title":"オラクルについて",
+                 "comment":"アジャイル開発について"
+                },
+                {"title":"DBついて",
+                    "comment":""
+                }
+                ],
             "skills": ["DB", "アジャイル"]
         },
         {
             "userid": "0003",
             "name": "鈴木三郎",
-            "books": ["Githubについて", "スクラムについて"],
+            "books": [
+                {"title":"Githubについて",
+                 "comment":"アジャイル開発について"
+                },
+                {"title":"Githubについて",
+                    "comment":"よかった"
+                }
+                ],
             "skills": ["Github"]
         }
     ]
