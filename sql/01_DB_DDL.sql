@@ -9,11 +9,3 @@ CREATE TABLE library.user(
     books VARCHAR(1000),
     skills VARCHAR(1000)
 );
-
-INSERT INTO library.user ( user_name, books, skills )
-VALUES (
-    '田中太郎',
-    'アジャイル開発について:良かった,Githubについて:初心者向け',
-    'アジャイル,Github'
-);
-
