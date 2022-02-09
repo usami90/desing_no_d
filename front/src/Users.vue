@@ -13,14 +13,14 @@
         <tr v-for="(user, index) in search_users" :key="index">
           <td v-html="highLight(user.name)"></td>
           <td>
-            <li v-for="(skill, index) in user.skills" :key="index" v-html="highLight(skill)">
-            </li>
+            <p  v-html="highLight(user.skills.join(','))">
+            </p>
           </td>
           <td>
           <div  v-for="(book, index) in user.books" :key="index" >
-            <li v-html="highLight(book.title)">
-            </li>
-            <p> {{book.comment}}
+            <p v-html="highLight(book.title)">
+            </p>
+            <p style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
             </p>
            </div> 
           </td>          
