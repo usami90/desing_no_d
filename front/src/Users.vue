@@ -1,6 +1,12 @@
 <template>
   <div>
     <div>検索：<input type="text" v-model="search"></div>
+      <div>スキル検索：
+        <select v-model="skillSearch">
+          <option> </option>
+          <option v-for="(skill, index) in allSkills" :key="index">{{skill.name}}</option>
+        </select>
+      </div>
     <table>
       <thead>
         <tr>
@@ -33,13 +39,22 @@
 <script>
 import axios from 'axios'
 
+  // #12ではこのDBで取得したスキルマップを配列形式に変換すること。
+  const allSkills = [ {"id":1, "name":"アジャイル"},
+                      {"id":2, "name":"Github"},
+                      {"id":3, "name":"WF"},
+                      {"id":4, "name":"JavaScript"},
+                      {"id":5, "name":"Python"}]
+
   // Webページ上のデータや操作の埋込
   export default {
     // データの設定
     data(){
       return {
         users: null,
-        search: ''
+        search: '',
+        allSkills: allSkills,
+        skillSearch: ''
       }
     },
 
@@ -56,24 +71,41 @@ import axios from 'axios'
           const re = new RegExp(searchWord, 'ig');
           return text.replace(re,function(search){
             return '<span style="background-color:yellow;font-weight:bold">'+ search + '</span>'})
-        }
+        },
       },
 
     // 算出プロパティの設定
     computed: {
       search_users(){
         let searchWord = this.search.trim()
-      if (searchWord === '') return this.users;
+        let searchSkillWord = this.skillSearch.trim()
+        if (searchSkillWord === ''){
+          // スキル検索が空の場合
+          if (searchWord === '') return this.users;
           return this.users.filter(user => {
               return user.name.includes(this.search) ||
-              user.books.join(" ").includes(this.search) ||
+              user.books.map(book => book.title).join(" ").includes(this.search) ||
               user.skills.join(" ").includes(this.search)
           })
+        }  else {
+          // スキル検索が入力されている場合
+          if (searchWord === '') {
+            return this.users.filter(user => {
+              return user.skills.join(" ").includes(searchSkillWord)
+          })
+            }
+          return this.users.filter(user => {
+              return (user.name.includes(this.search) ||
+              user.books.map(book => book.title).join(" ").includes(this.search) ||
+              user.skills.join(" ").includes(this.search)) &&
+              user.skills.join(" ").includes(searchSkillWord)
+          })
+        }
       }
     },
 
     mounted() {
-      axios.get('http://localhost:3000/users')
+      axios.get('http://localhost:3000')
       .then(response => {
           this.users = response.data.data
           })
