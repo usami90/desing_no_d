@@ -18,8 +18,8 @@ router.get("/", (req, res, next) => {
         };
       });
       return {
-        userid: user.user_id,
-        name: user.user_name,
+        userid: user.id,
+        name: user.name,
         books: book,
         skills: user.skills.split(","),
       };
