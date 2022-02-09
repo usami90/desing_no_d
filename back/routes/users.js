@@ -16,7 +16,6 @@ router.get("/", (req, res, next) => {
   (async () => {
     var sql = "SELECT * FROM user;";
     var result = await db.doQuery(sql);
-
     var data = result.map( (user) => {
       book = user.book.split(",").map( (book) => {
         bookinfo = book.split(":");
@@ -32,7 +31,6 @@ router.get("/", (req, res, next) => {
         "skill": user.skill.split(",")
       }
     })
-
     res.json({ data: data });
   })().catch(next);
 });
