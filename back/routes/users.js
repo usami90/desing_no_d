@@ -28,8 +28,8 @@ router.get("/", (req, res, next) => {
       return {
         "userid": user.user_id,
         "name": user.user_name,
-        "book": book,
-        "skill": user.skill.split(",")
+        "books": book,
+        "skills": user.skill.split(",")
       }
     })
     res.json({ "data": data });
