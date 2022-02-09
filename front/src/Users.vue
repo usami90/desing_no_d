@@ -105,7 +105,7 @@ import axios from 'axios'
     },
 
     mounted() {
-      axios.get('http://localhost:3000/users')
+      axios.get('http://localhost:3000')
       .then(response => {
           this.users = response.data.data
           })
