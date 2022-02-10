@@ -31,12 +31,13 @@ router.post("/", (req, res, next) => {
     if (check_input(data)) {
 
         /* SQL文の作成 */
-      user_add_sql = "";
+      user_add_sql = "instert into library.user (name,books,skills) values\
+       ('"+data.name+"',\
+       '"+data.books.map(book =>book.title+":"+book.comment).join(",")+"',\
+       '"+data.skills.join(",")+"');";
 
-
-      
       // ユーザーの登録
-      // await doQuery(user_add_sql);
+    await doQuery(user_add_sql);
     }
 
     /* ユーザー一覧送信の処理 */
@@ -68,7 +69,7 @@ router.post("/", (req, res, next) => {
 
 /* 入力条件のチェック */
 function check_input(json_data){
-
+return true;
 }
 
 module.exports = router;
