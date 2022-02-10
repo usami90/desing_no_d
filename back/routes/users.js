@@ -27,16 +27,19 @@ router.post("/", (req, res, next) => {
     // var data = req.body;
     // console.log(data);
 
-    /* 入力条件のチェック */
-    if (check_input(data)) {
+    var error_message = "";
 
-        /* SQL文の作成 */
+    /* 入力条件のチェック */
+    try {
+      check_input(data);
+
+      /* SQL文の作成 */
       user_add_sql = "";
 
-
-      
       // ユーザーの登録
       // await doQuery(user_add_sql);
+    } catch (err) {
+      error_message = err;
     }
 
     /* ユーザー一覧送信の処理 */
@@ -61,14 +64,14 @@ router.post("/", (req, res, next) => {
     var skill_sql = "SELECT * FROM skill;";
     var skills = await doQuery(skill_sql);
 
-    res.json({ data: { users: users, skills: skills } });
+    res.json({
+      data: { users: users, skills: skills },
+      error: error_message.length > 0 ? { message: error_message } : null,
+    });
   })().catch(next);
 });
 
-
 /* 入力条件のチェック */
-function check_input(json_data){
-
-}
+function check_input(json_data) {}
 
 module.exports = router;
