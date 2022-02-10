@@ -3,23 +3,41 @@ var router = express.Router();
 
 const { doQuery } = require("./models/database");
 
+const data = {
+  name: "田中太郎",
+  skills: ["アジャイル", "Github"],
+  books: [
+    {
+      title: "アジャイルについて",
+      comment: " 初心者向け",
+    },
+    {
+      title: "Githubについて",
+      comment: "初心者向け",
+    },
+  ],
+};
+
 /* PUT Add User to DB */
 router.post("/", (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
   (async () => {
-    var data = req.body;
-
     // bodyを表示
     // JSONが格納されているか確認
+    // var data = req.body;
     // console.log(data);
 
-    /* SQL文の作成 */
-    user_add_sql = "";
+    /* 入力条件のチェック */
+    if (check_input(data)) {
+
+        /* SQL文の作成 */
+      user_add_sql = "";
 
 
-    // ユーザーの登録
-    // await doQuery(user_add_sql);
-    
+      
+      // ユーザーの登録
+      // await doQuery(user_add_sql);
+    }
 
     /* ユーザー一覧送信の処理 */
     var user_sql = "SELECT * FROM user;";
@@ -46,5 +64,11 @@ router.post("/", (req, res, next) => {
     res.json({ data: { users: users, skills: skills } });
   })().catch(next);
 });
+
+
+/* 入力条件のチェック */
+function check_input(json_data){
+
+}
 
 module.exports = router;
