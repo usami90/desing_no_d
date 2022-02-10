@@ -24,8 +24,7 @@
           </td>
           <td>
           <div  v-for="(book, index) in user.books" :key="index" >
-            <p v-html="highLight(book.title)">
-            </p>
+            <p v-html="highLight(book.title)"></p>
             <p style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
             </p>
            </div> 
@@ -33,6 +32,53 @@
         </tr>
       </tbody>
     </table>
+    <!-- 登録フォーム -->
+    <br><br>
+    <div>
+      ユーザー登録フォーム
+      <table>
+        <tr>
+          <td style="background-color:#EDF7FF">社員名*</td>
+          <td><input type="text" v-model="userName" placeholder="社員名"></td>
+        </tr>
+        <tr>
+          <td style="background-color:#EDF7FF">スキル</td>
+          <td>
+            <div v-for="(skill, index) in allSkills" :key="index">
+              <input 
+              :id="skill + index"
+              type="checkbox"
+              :value="skill"
+              v-model="userSkills">
+              <label :for="skill.name">{{skill.name}}</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#EDF7FF">おススメの本１</td>
+          <td>
+            <p><input type="text" v-model="userBook1Title" placeholder="本のタイトル"></p>
+            <textarea rows="5" cols="80" v-model="userBook1Comment" placeholder="本のコメント、可能なら難易度や社内にその本があるかどうかの情報も記載"/>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#EDF7FF">おススメの本２</td>
+          <td>
+            <p><input type="text" v-model="userBook2Title" placeholder="本のタイトル"></p>
+            <textarea rows="5" cols="80" v-model="userBook2Comment" placeholder="本のコメント、可能なら難易度や社内にその本があるかどうかの情報も記載"/>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#EDF7FF">おススメの本３</td>
+          <td>
+            <p><input type="text" v-model="userBook3Title" placeholder="本のタイトル"></p>
+            <textarea rows="5" cols="80" v-model="userBook3Comment" placeholder="本のコメント、可能なら難易度や社内にその本があるかどうかの情報も記載"/>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <div align="right"><button v-on:click="addUser" align="right">登録</button></div>
+    </div>
   </div>
 </template>
 
@@ -47,7 +93,15 @@ import axios from 'axios'
         users: null,
         search: '',
         allSkills: null,
-        skillSearch: ''
+        skillSearch: '',
+        userName: '',
+        userSkills: [],
+        userBook1Title: '',
+        userBook1Comment: '',
+        userBook2Title: '',
+        userBook2Comment: '',
+        userBook3Title: '',
+        userBook3Comment: ''
       }
     },
 
@@ -65,6 +119,9 @@ import axios from 'axios'
           return text.replace(re,function(search){
             return '<span style="background-color:yellow;font-weight:bold">'+ search + '</span>'})
         },
+        addUser: function() {
+          alert("登録ボタン押下")
+      }
       },
 
     // 算出プロパティの設定
