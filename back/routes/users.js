@@ -1,10 +1,9 @@
 var express = require("express");
-var bodyParser = require("body-parser");
 var router = express.Router();
 
 const { doQuery } = require("./models/database");
 
-/* PUT Add Users to DB */
+/* PUT Add User to DB */
 router.post("/", (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
   (async () => {
