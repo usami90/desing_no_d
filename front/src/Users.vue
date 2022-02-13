@@ -19,11 +19,11 @@
         <tr v-for="(user, index) in search_users" :key="index">
           <td v-html="highLight(user.name)"></td>
           <td>
-            <p  v-html="highLight(user.skills.join(','))">
+            <p v-html="highLight(user.skills.join(','))">
             </p>
           </td>
           <td>
-          <div  v-for="(book, index) in user.books" :key="index" >
+          <div v-for="(book, index) in user.books" :key="index" >
             <p v-html="highLight(book.title)"></p>
             <p style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
             </p>
@@ -44,13 +44,13 @@
         <tr>
           <td style="background-color:#EDF7FF">スキル</td>
           <td>
-            <div v-for="(skill, index) in allSkills" :key="index">
+            <div v-for="(skill, index) in allSkills" :key="index" style="display: inline-block">
               <input 
               :id="skill + index"
               type="checkbox"
-              :value="skill"
+              :value="skill.name"
               v-model="userSkills">
-              <label :for="skill.name">{{skill.name}}</label>
+              <label :for="skill.name">{{skill.name}}&nbsp;&nbsp;</label>
             </div>
           </td>
         </tr>
@@ -120,7 +120,7 @@ import axios from 'axios'
             return '<span style="background-color:yellow;font-weight:bold">'+ search + '</span>'})
         },
         addUser: function() {
-          alert("登録ボタン押下")
+          alert(this.userSkills)
       }
       },
 
