@@ -33,14 +33,18 @@ router.post("/", (req, res, next) => {
     try {
       check_input(data);
 
-        /* SQL文の作成 */
-      user_add_sql = "insert into library.user (name,books,skills)+  values (\
-        '"+data.name+"',\
-        '"+data.books.map(book =>book.title+":"+book.comment).join(",")+"',\
-        '"+data.skills.join(",")+"');";
+      /* SQL文の作成 */
+      user_add_sql =
+        "insert into library.user (name,books,skills)+  values ('" +
+        data.name +
+        "','" +
+        data.books.map((book) => book.title + ":" + book.comment).join(",") +
+        "','" +
+        data.skills.join(",") +
+        "');";
 
       // ユーザーの登録
-    await doQuery(user_add_sql);
+      await doQuery(user_add_sql);
     } catch (err) {
       error_message = err;
     }
@@ -75,27 +79,30 @@ router.post("/", (req, res, next) => {
 });
 
 /* 入力条件のチェック */
-function check_input(json_data){
-  
+function check_input(json_data) {
   // ユーザー名が空
-  if(json_data.name == null || json_data.name == ""){
-    throw 'ユーザー名が入力されていません。';
-  };
+  if (json_data.name == null || json_data.name == "") {
+    throw "ユーザー名が入力されていません。";
+  }
 
   // 本のタイトルが空で、コメントあり
-  json_data.books.map( (book) => {
-    if (book.comment != "" && (book.title == null || book.title == "")){
-      throw '本のタイトルが入力されていません。';
+  json_data.books.map((book) => {
+    if (book.comment != "" && (book.title == null || book.title == "")) {
+      throw "本のタイトルが入力されていません。";
     }
-  })
+  });
 
   // 本のタイトルとコメントに、半角カンマと半角コロン
-  json_data.books.map( (book) => {
-    if (book.title.includes(',') || book.title.includes(':')
-       || book.comment.includes(',') || book.comment.includes(':')){
-        throw '本のタイトルとコメントには半角カンマ、半角コロンは使用できません';
+  json_data.books.map((book) => {
+    if (
+      book.title.includes(",") ||
+      book.title.includes(":") ||
+      book.comment.includes(",") ||
+      book.comment.includes(":")
+    ) {
+      throw "本のタイトルとコメントには半角カンマ、半角コロンは使用できません";
     }
-  })
+  });
 
   return true;
 }
