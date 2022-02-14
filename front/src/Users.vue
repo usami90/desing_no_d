@@ -119,10 +119,36 @@ import axios from 'axios'
           return text.replace(re,function(search){
             return '<span style="background-color:yellow;font-weight:bold">'+ search + '</span>'})
         },
-        addUser: function() {
-          alert(this.userSkills)
+      addUser: function() {
+        var books = [
+          {
+            title: this.userBook1Title,
+            comment: this.userBook1Comment
+          },
+          {
+            title: this.userBook2Title,
+            comment: this.userBook2Comment
+          },
+          {
+            title: this.userBook3Title,
+            comment: this.userBook3Comment
+          }
+        ]
+        var user = {
+          name: this.userName,
+          skills: this.userSkills,
+          books: books
+        };
+        alert(user.name);
+        axios.post('http://localhost:3000/user',{
+          "name": '田中'
+        })
+        .then(response => {
+          this.users = response.data.data.users;
+          this.allSkills = response.data.data.skills;
+        })
       }
-      },
+    },
 
     // 算出プロパティの設定
     computed: {
