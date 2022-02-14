@@ -107,7 +107,7 @@ import axios from 'axios'
         userBook2Comment: '',
         userBook3Title: '',
         userBook3Comment: '',
-        errorMessage:'これはエラーメッセージです。'
+        errorMessage:''
       }
     },
 
