@@ -86,7 +86,6 @@
       <div style="background-color:#ffc0cb; margin-bottom:30px" v-if="this.errorMessage!==null">{{this.errorMessage}}</div>
       <div align="right"><button v-on:click="addUser" align="right">登録</button></div>
     </div>
-
   </div>
 </template>
 
@@ -127,7 +126,7 @@ import axios from 'axios'
           const re = new RegExp(searchWord, 'ig');
           return text.replace(re,function(search){
             return '<span style="background-color:yellow;font-weight:bold">'+ search + '</span>'})
-        },
+          },
       addUser: function() {
         var books = [
           {
@@ -151,7 +150,7 @@ import axios from 'axios'
           this.users = response.data.data.users;
           this.allSkills = response.data.data.skills;
           this.errorMessage = response.data.error.message;
-          if(this.errorMessage == null || this.errorMessage == ""){
+          if(this.errorMessage === null || this.errorMessage === ""){
             alert('ユーザ情報が登録されました。');
             this.userName = '';
             this.userSkills = [];
@@ -175,7 +174,7 @@ import axios from 'axios'
                 this.users = response.data.data.users;
                 this.allSkills = response.data.data.skills;
                 this.errorMessage = response.data.error.message;
-                if(this.errorMessage == null || this.errorMessage == ""){
+                if(this.errorMessage === null || this.errorMessage === ""){
                   alert(name + 'のユーザ削除が成功しました。');
               }
             })

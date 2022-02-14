@@ -21,14 +21,16 @@ router.post("/", (req, res, next) => {
         "insert into library.user (name,books,skills) values ('" +
         data.name +
         "','" +
-        data.books.filter((book)=>book.title !== "").map((book) => book.title + ":" + book.comment).join(",") +
+        data.books
+          .filter((book) => book.title !== "")
+          .map((book) => book.title + ":" + book.comment)
+          .join(",") +
         "','" +
         data.skills.join(",") +
         "');";
 
       // ユーザーの登録
       await doQuery(user_add_sql);
-
     } catch (err) {
       console.log("---------- Error ----------");
       console.log(err);
@@ -67,7 +69,7 @@ router.post("/", (req, res, next) => {
 
     res.json({
       data: { users: users, skills: skills },
-      error: error_message ==null ? null : { message: error_message },
+      error: { message: error_message === null ? null : error_message },
     });
   })().catch(next);
 });
@@ -84,13 +86,10 @@ router.delete("/", (req, res, next) => {
     try {
       /* SQL文の作成 */
       const user_add_sql =
-        "delete from library.user where id = " +
-        data.id +
-        ";";
+        "delete from library.user where id = " + data.id + ";";
 
       // ユーザーの削除
       await doQuery(user_add_sql);
-
     } catch (err) {
       console.log("---------- Error ----------");
       console.log(err);
@@ -129,7 +128,7 @@ router.delete("/", (req, res, next) => {
 
     res.json({
       data: { users: users, skills: skills },
-      error: error_message ==null ? null : { message: error_message },
+      error: { message: error_message === null ? null : error_message },
     });
   })().catch(next);
 });
