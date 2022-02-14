@@ -17,7 +17,6 @@ router.get("/", (req, res, next) => {
                 .split(",")
                 .map((book) => book.split(":"))
                 .map((bookinfo) => {
-                  console.log(bookinfo);
                   return { title: bookinfo[0], comment: bookinfo[1] };
                 })
             : [];
