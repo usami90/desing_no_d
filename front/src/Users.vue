@@ -151,7 +151,7 @@ import axios from 'axios'
         }).then(response => {
           this.users = response.data.data.users;
           this.allSkills = response.data.data.skills;
-          this.errorMessage = response.data.data.error.message;
+          this.errorMessage = response.data.error.message;
         })
         if(this.errorMessage == null || this.errorMessage == ""){
           alert('ユーザ情報が登録されました。');
