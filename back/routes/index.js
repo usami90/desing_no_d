@@ -7,7 +7,7 @@ const { doQuery } = require("./models/database");
 router.get("/", (req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
   (async () => {
-    var user_sql = "SELECT * FROM user;";
+    const user_sql = "SELECT * FROM user;";
     var user_result = await doQuery(user_sql);
     var users = user_result.map((user) => {
       book = user.books.split(",").map((book) => {
@@ -25,7 +25,7 @@ router.get("/", (req, res, next) => {
       };
     });
 
-    var skill_sql = "SELECT * FROM skill;";
+    const skill_sql = "SELECT * FROM skill;";
     var skills = await doQuery(skill_sql);
 
     res.json({ data: { users: users, skills: skills } });

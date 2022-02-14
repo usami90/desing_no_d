@@ -34,7 +34,7 @@ router.post("/", (req, res, next) => {
       check_input(data);
 
       /* SQL文の作成 */
-      user_add_sql =
+      const user_add_sql =
         "insert into library.user (name,books,skills)+  values ('" +
         data.name +
         "','" +
@@ -50,7 +50,7 @@ router.post("/", (req, res, next) => {
     }
 
     /* ユーザー一覧送信の処理 */
-    var user_sql = "SELECT * FROM user;";
+    const user_sql = "SELECT * FROM user;";
     var user_result = await doQuery(user_sql);
     var users = user_result.map((user) => {
       book = user.books.split(",").map((book) => {
@@ -68,7 +68,7 @@ router.post("/", (req, res, next) => {
       };
     });
 
-    var skill_sql = "SELECT * FROM skill;";
+    const skill_sql = "SELECT * FROM skill;";
     var skills = await doQuery(skill_sql);
 
     res.json({
