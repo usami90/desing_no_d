@@ -3,29 +3,29 @@ var router = express.Router();
 
 const { doQuery } = require("./models/database");
 
-const data = {
-  name: "コメントなし",
-  skills: ["アジャイル", "Github"],
-  books: [
-    {
-      title: "アジャイルについて",
-      comment: "",
-    },
-    {
-      title: "Githubについて",
+// const data = {
+//   name: "コメントなし",
+//   skills: ["アジャイル", "Github"],
+//   books: [
+//     {
+//       title: "アジャイルについて",
+//       comment: "",
+//     },
+//     {
+//       title: "Githubについて",
 
-      comment: "",
-    },
-  ],
-};
+//       comment: "",
+//     },
+//   ],
+// };
 
 /* PUT Add User to DB */
 router.post("/", (req, res, next) => {
   (async () => {
     // bodyを表示
     // JSONが格納されているか確認
-    // var data = req.body;
-    // console.log(data);
+    var data = req.body;
+    console.log(data);
 
     var error_message = null;
 
@@ -45,9 +45,10 @@ router.post("/", (req, res, next) => {
 
       // ユーザーの登録
       await doQuery(user_add_sql);
+      
     } catch (err) {
       console.log("---------- Error ----------");
-      console.log(err);
+      // console.log(err);
       console.log("SQL: " + user_add_sql);
       console.log("Data: ");
       console.log(data);
