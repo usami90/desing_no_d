@@ -27,7 +27,7 @@ router.post("/", (req, res, next) => {
     // var data = req.body;
     // console.log(data);
 
-    var error_message = "";
+    var error_message = null;
 
     /* 入力条件のチェック */
     try {
@@ -46,6 +46,11 @@ router.post("/", (req, res, next) => {
       // ユーザーの登録
       await doQuery(user_add_sql);
     } catch (err) {
+      console.log("---------- Error ----------");
+      console.log(err);
+      console.log("SQL: " + user_add_sql);
+      console.log("Data: ");
+      console.log(data);
       error_message = err;
     }
 
@@ -73,7 +78,7 @@ router.post("/", (req, res, next) => {
 
     res.json({
       data: { users: users, skills: skills },
-      error: error_message.length > 0 ? { message: error_message } : null,
+      error: error_message ==null ? null : { message: error_message },
     });
   })().catch(next);
 });
@@ -104,7 +109,7 @@ function check_input(json_data) {
     }
   });
 
-  return true;
+  return false;
 }
 
 module.exports = router;
