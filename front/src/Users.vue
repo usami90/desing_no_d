@@ -13,6 +13,7 @@
           <th>社員名</th>
           <th>得意なスキル</th>
           <th>おススメの本</th>
+          <th>削除</th>
         </tr>
       </thead>
       <tbody>
@@ -28,7 +29,8 @@
             <p style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
             </p>
            </div> 
-          </td>    
+          </td>
+          <td><button v-on:click="deleteUser(user.userid, user.name)">削除</button></td>
         </tr>
       </tbody>
     </table>
@@ -153,7 +155,14 @@ import axios from 'axios'
           this.userBook2Comment = '';
           this.userBook3Title = '';
           this.userBook3Comment = '';
-        }
+        },
+        deleteUser: function(id, name){
+          if (window.confirm(name + "のデータを削除します。よろしいですか？")){
+            // 削除処理を実行する。
+            alert("ユーザID:" + id + "の削除するSQLをバックエンド側で実行する。")
+          } else {
+            // キャンセル時は何も行わない。
+          }
       }
     },
 
