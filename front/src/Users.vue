@@ -120,7 +120,6 @@ import axios from 'axios'
             return '<span style="background-color:yellow;font-weight:bold">'+ search + '</span>'})
         },
       addUser: function() {
-        var errorMessage = null;
         var books = [
           {
             title: this.userBook1Title,
@@ -142,9 +141,9 @@ import axios from 'axios'
         }).then(response => {
           this.users = response.data.data.users;
           this.allSkills = response.data.data.skills;
-          errorMessage = response.data.data.error.message;
+          this.errorMessage = response.data.data.error.message;
         })
-        if(errorMessage == null || errorMessage == ""){
+        if(this.errorMessage == null || this.errorMessage == ""){
           alert('ユーザ情報が登録されました。');
           this.userName = '';
           this.userSkills = [];
