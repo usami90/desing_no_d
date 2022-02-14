@@ -176,7 +176,7 @@ import axios from 'axios'
                 this.allSkills = response.data.data.skills;
                 this.errorMessage = response.data.error.message;
                 if(this.errorMessage == null || this.errorMessage == ""){
-                  alert(name + 'のユーザ削除が成功ました。');
+                  alert(name + 'のユーザ削除が成功しました。');
               }
             })
           } else {
