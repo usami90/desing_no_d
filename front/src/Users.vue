@@ -30,7 +30,7 @@
             </p>
            </div> 
           </td>
-          <td><button v-on:click="deleteUser(user.userid)">削除</button></td>
+          <td><button v-on:click="deleteUser(user.userid, user.name)">削除</button></td>
         </tr>
       </tbody>
     </table>
@@ -123,8 +123,13 @@ import axios from 'axios'
         },
         addUser: function() {
           alert(this.userSkills)
-      }, deleteUser: function(id){
-          alert("ユーザID：" + id + "の削除ボタンが押下されました。")
+      }, deleteUser: function(id, name){
+          if (window.confirm(name + "のデータを削除します。よろしいですか？")){
+            // 削除処理を実行する。
+            alert("ユーザID:" + id + "の削除するSQLをバックエンド側で実行する。")
+          } else {
+            // キャンセル時は何も行わない。
+          }
       }
       },
 
