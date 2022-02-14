@@ -27,9 +27,6 @@ router.post("/", (req, res, next) => {
     // var data = req.body;
     // console.log(data);
 
-    console.log("リクエストボディ");
-    console.log(req.body);
-
     /* 入力条件のチェック */
     if (check_input(data)) {
 

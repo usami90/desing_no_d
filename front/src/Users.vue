@@ -120,6 +120,7 @@ import axios from 'axios'
             return '<span style="background-color:yellow;font-weight:bold">'+ search + '</span>'})
         },
       addUser: function() {
+        var errorMessage = null;
         var books = [
           {
             title: this.userBook1Title,
@@ -134,19 +135,26 @@ import axios from 'axios'
             comment: this.userBook3Comment
           }
         ]
-        var user = {
+        axios.post('http://localhost:3000/user',{
           name: this.userName,
           skills: this.userSkills,
           books: books
-        };
-        alert(user.name);
-        axios.post('http://localhost:3000/user',{
-          "name": '田中'
-        })
-        .then(response => {
+        }).then(response => {
           this.users = response.data.data.users;
           this.allSkills = response.data.data.skills;
+          errorMessage = response.data.data.error.message;
         })
+        if(errorMessage == null || errorMessage == ""){
+          alert("ユーザ情報が登録されました。");
+          this.userName = '';
+          this.userSkills = [];
+          this.userBook1Title = '';
+          this.userBook1Comment = '';
+          this.userBook2Title = '';
+          this.userBook2Comment = '';
+          this.userBook3Title = '';
+          this.userBook3Comment = '';
+        }
       }
     },
 
