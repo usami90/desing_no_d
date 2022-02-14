@@ -68,7 +68,27 @@ router.post("/", (req, res, next) => {
 
 /* 入力条件のチェック */
 function check_input(json_data){
+  // ユーザー名が空
+  if(json_data.name == null || json_data.name == ""){
+    throw 'ユーザー名が入力されていません。';
+  };
 
+  // 本のタイトルが空で、コメントあり
+  json_data.books.map( (book) => {
+    if (book.comment != "" && (book.title == null || book.title == "")){
+      throw '本のタイトルが入力されていません。';
+    }
+  })
+
+  // 本のタイトルとコメントに、半角カンマと半角コロン
+  json_data.books.map( (book) => {
+    if (book.title.includes(',') || book.title.includes(':')
+       || book.comment.includes(',') || book.comment.includes(':')){
+        throw '本のタイトルとコメントには半角カンマ、半角コロンは使用できません';
+    }
+  })
+
+  return true;
 }
 
 module.exports = router;
