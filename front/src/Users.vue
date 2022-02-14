@@ -25,9 +25,9 @@
           </td>
           <td>
           <div style="margin-bottom:15px" v-for="(book, index) in user.books" :key="index" >
-            <span>書籍：【</span>
+            <span>📕『</span>
             <span v-html="highLight(book.title)"></span>
-            <span>】</span><br/>
+            <span>』</span><br/>
             <div style="margin-left:20px">
             <span style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
             </span>
@@ -48,7 +48,7 @@
           <td><input type="text" v-model="userName" placeholder="社員名"></td>
         </tr>
         <tr>
-          <td style="background-color:#EDF7FF">スキル</td>
+          <td style="background-color:#EDF7FF">得意なスキル</td>
           <td>
             <div v-for="(skill, index) in allSkills" :key="index" style="display: inline-block">
               <input 

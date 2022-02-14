@@ -4,16 +4,16 @@ var router = express.Router();
 const { doQuery } = require("./models/database");
 
 const data = {
-  name: "田中太郎",
+  name: "コメントなし",
   skills: ["アジャイル", "Github"],
   books: [
     {
       title: "アジャイルについて",
-      comment: " 初心者向け",
+      comment: "",
     },
     {
       title: "Githubについて",
-      comment: "初心者向け",
+      comment: "",
     },
   ],
 };
@@ -35,7 +35,7 @@ router.post("/", (req, res, next) => {
 
       /* SQL文の作成 */
       const user_add_sql =
-        "insert into library.user (name,books,skills)+  values ('" +
+        "insert into library.user (name,books,skills) values ('" +
         data.name +
         "','" +
         data.books.map((book) => book.title + ":" + book.comment).join(",") +
