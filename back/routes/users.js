@@ -13,6 +13,7 @@ const data = {
     },
     {
       title: "Githubについて",
+
       comment: "",
     },
   ],
@@ -20,7 +21,6 @@ const data = {
 
 /* PUT Add User to DB */
 router.post("/", (req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
   (async () => {
     // bodyを表示
     // JSONが格納されているか確認
@@ -38,7 +38,7 @@ router.post("/", (req, res, next) => {
         "insert into library.user (name,books,skills) values ('" +
         data.name +
         "','" +
-        data.books.map((book) => book.title + ":" + book.comment).join(",") +
+        data.books.filter((book)=>book.title !== "").map((book) => book.title + ":" + book.comment).join(",") +
         "','" +
         data.skills.join(",") +
         "');";

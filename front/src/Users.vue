@@ -83,8 +83,11 @@
         </tr>
       </table>
       <br>
+      
       <div align="right"><button v-on:click="addUser" align="right">登録</button></div>
     </div>
+
+ <div style="background-color:#ffc0cb; margin-top:30px" v-if="this.errorMessage!==null">{{this.errorMessage}}</div>
   </div>
 </template>
 
@@ -107,7 +110,8 @@ import axios from 'axios'
         userBook2Title: '',
         userBook2Comment: '',
         userBook3Title: '',
-        userBook3Comment: ''
+        userBook3Comment: '',
+        errorMessage:''
       }
     },
 
@@ -125,9 +129,43 @@ import axios from 'axios'
           return text.replace(re,function(search){
             return '<span style="background-color:yellow;font-weight:bold">'+ search + '</span>'})
         },
-        addUser: function() {
-          alert(this.userSkills)
-      }, deleteUser: function(id, name){
+      addUser: function() {
+        var books = [
+          {
+            title: this.userBook1Title,
+            comment: this.userBook1Comment
+          },
+          {
+            title: this.userBook2Title,
+            comment: this.userBook2Comment
+          },
+          {
+            title: this.userBook3Title,
+            comment: this.userBook3Comment
+          }
+        ]
+        axios.post('http://localhost:3000/user',{
+          name: this.userName,
+          skills: this.userSkills,
+          books: books
+        }).then(response => {
+          this.users = response.data.data.users;
+          this.allSkills = response.data.data.skills;
+          this.errorMessage = response.data.data.error.message;
+        })
+        if(this.errorMessage == null || this.errorMessage == ""){
+          alert('ユーザ情報が登録されました。');
+          this.userName = '';
+          this.userSkills = [];
+          this.userBook1Title = '';
+          this.userBook1Comment = '';
+          this.userBook2Title = '';
+          this.userBook2Comment = '';
+          this.userBook3Title = '';
+          this.userBook3Comment = '';
+        }
+      },
+        deleteUser: function(id, name){
           if (window.confirm(name + "のデータを削除します。よろしいですか？")){
             // 削除処理を実行する。
             alert("ユーザID:" + id + "の削除するSQLをバックエンド側で実行する。")
@@ -135,7 +173,7 @@ import axios from 'axios'
             // キャンセル時は何も行わない。
           }
       }
-      },
+    },
 
     // 算出プロパティの設定
     computed: {
