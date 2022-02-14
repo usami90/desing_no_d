@@ -31,10 +31,10 @@ router.post("/", (req, res, next) => {
     if (check_input(data)) {
 
         /* SQL文の作成 */
-      user_add_sql = "instert into library.user (name,books,skills) values\
-       ('"+data.name+"',\
-       '"+data.books.map(book =>book.title+":"+book.comment).join(",")+"',\
-       '"+data.skills.join(",")+"');";
+      user_add_sql = "insert into library.user (name,books,skills)+  values (\
+        '"+data.name+"',\
+        '"+data.books.map(book =>book.title+":"+book.comment).join(",")+"',\
+        '"+data.skills.join(",")+"');";
 
       // ユーザーの登録
     await doQuery(user_add_sql);
