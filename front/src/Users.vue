@@ -13,6 +13,7 @@
           <th>社員名</th>
           <th>得意なスキル</th>
           <th>おススメの本</th>
+          <th>削除</th>
         </tr>
       </thead>
       <tbody>
@@ -28,7 +29,8 @@
             <p style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
             </p>
            </div> 
-          </td>    
+          </td>
+          <td><button v-on:click="deleteUser(user.userid)">削除</button></td>
         </tr>
       </tbody>
     </table>
@@ -121,6 +123,8 @@ import axios from 'axios'
         },
         addUser: function() {
           alert(this.userSkills)
+      }, deleteUser: function(id){
+          alert("ユーザID：" + id + "の削除ボタンが押下されました。")
       }
       },
 
@@ -155,7 +159,8 @@ import axios from 'axios'
     },
 
     mounted() {
-      axios.get('http://localhost:3000')
+      // axios.get('http://localhost:3000')
+      axios.post('http://localhost:3000/user')
       .then(response => {
           this.users = response.data.data.users;
           this.allSkills = response.data.data.skills;
