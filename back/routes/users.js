@@ -72,6 +72,68 @@ router.post("/", (req, res, next) => {
   })().catch(next);
 });
 
+/* DELETE User to DB */
+router.delete("/", (req, res, next) => {
+  (async () => {
+    // bodyを表示: JSONが格納されているか確認
+    var data = req.body;
+    console.log(data);
+
+    var error_message = null;
+
+    try {
+      /* SQL文の作成 */
+      const user_add_sql =
+        "delete from library.user where id = " +
+        data.id +
+        ";";
+
+      // ユーザーの削除
+      await doQuery(user_add_sql);
+
+    } catch (err) {
+      console.log("---------- Error ----------");
+      console.log(err);
+      console.log("Data: ");
+      console.log(data);
+      error_message = err;
+    }
+
+    /* ユーザー一覧送信の処理 */
+    const user_sql = "SELECT * FROM user;";
+    var user_result = await doQuery(user_sql);
+    var users = user_result
+      .map((user) => {
+        user.books =
+          user.books.length > 0
+            ? user.books
+                .split(",")
+                .map((book) => book.split(":"))
+                .map((bookinfo) => {
+                  return { title: bookinfo[0], comment: bookinfo[1] };
+                })
+            : [];
+        return user;
+      })
+      .map((user) => {
+        return {
+          userid: user.id,
+          name: user.name,
+          books: user.books,
+          skills: user.skills.split(","),
+        };
+      });
+
+    const skill_sql = "SELECT * FROM skill;";
+    var skills = await doQuery(skill_sql);
+
+    res.json({
+      data: { users: users, skills: skills },
+      error: error_message ==null ? null : { message: error_message },
+    });
+  })().catch(next);
+});
+
 /* 入力条件のチェック */
 function check_input(json_data) {
   // ユーザー名が空
