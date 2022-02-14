@@ -145,7 +145,7 @@ import axios from 'axios'
           errorMessage = response.data.data.error.message;
         })
         if(errorMessage == null || errorMessage == ""){
-          alert("ユーザ情報が登録されました。");
+          alert('ユーザ情報が登録されました。');
           this.userName = '';
           this.userSkills = [];
           this.userBook1Title = '';
