@@ -159,7 +159,8 @@ import axios from 'axios'
           this.userBook2Comment = '';
           this.userBook3Title = '';
           this.userBook3Comment = '';
-        },
+        }
+      },
         deleteUser: function(id, name){
           if (window.confirm(name + "のデータを削除します。よろしいですか？")){
             // 削除処理を実行する。
