@@ -8,7 +8,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: passwd
       TZ: 'Asia/Tokyo'
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     volumes:
     - ./mysql.cnf:/etc/mysql/conf.d/my.cnf
     - ../sql:/docker-entrypoint-initdb.d
