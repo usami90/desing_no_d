@@ -9,21 +9,27 @@ router.get("/", (req, res, next) => {
   (async () => {
     const user_sql = "SELECT * FROM user;";
     var user_result = await doQuery(user_sql);
-    var users = user_result.map((user) => {
-      book = user.books.split(",").map((book) => {
-        bookinfo = book.split(":");
+    var users = user_result
+      .map((user) => {
+        user.books =
+          user.books.length > 0
+            ? user.books
+                .split(",")
+                .map((book) => book.split(":"))
+                .map((bookinfo) => {
+                  return { title: bookinfo[0], comment: bookinfo[1] };
+                })
+            : [];
+        return user;
+      })
+      .map((user) => {
         return {
-          title: bookinfo[0],
-          comment: bookinfo[1],
+          userid: user.id,
+          name: user.name,
+          books: user.books,
+          skills: user.skills.split(","),
         };
       });
-      return {
-        userid: user.id,
-        name: user.name,
-        books: book,
-        skills: user.skills.split(","),
-      };
-    });
 
     const skill_sql = "SELECT * FROM skill;";
     var skills = await doQuery(skill_sql);

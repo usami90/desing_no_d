@@ -4,15 +4,16 @@ var router = express.Router();
 const { doQuery } = require("./models/database");
 
 const data = {
-  name: "田中太郎",
+  name: "コメントなし",
   skills: ["アジャイル", "Github"],
   books: [
     {
-      title: "",
+      title: "アジャイルについて",
       comment: "",
     },
     {
-      title: "",
+      title: "Githubについて",
+
       comment: "",
     },
   ],
@@ -34,7 +35,7 @@ router.post("/", (req, res, next) => {
 
       /* SQL文の作成 */
       const user_add_sql =
-        "insert into library.user (name,books,skills)  values ('" +
+        "insert into library.user (name,books,skills) values ('" +
         data.name +
         "','" +
         data.books.filter((book)=>book.title !== "").map((book) => book.title + ":" + book.comment).join(",") +
@@ -56,21 +57,27 @@ router.post("/", (req, res, next) => {
     /* ユーザー一覧送信の処理 */
     const user_sql = "SELECT * FROM user;";
     var user_result = await doQuery(user_sql);
-    var users = user_result.map((user) => {
-      book = user.books.split(",").map((book) => {
-        bookinfo = book.split(":");
+    var users = user_result
+      .map((user) => {
+        user.books =
+          user.books.length > 0
+            ? user.books
+                .split(",")
+                .map((book) => book.split(":"))
+                .map((bookinfo) => {
+                  return { title: bookinfo[0], comment: bookinfo[1] };
+                })
+            : [];
+        return user;
+      })
+      .map((user) => {
         return {
-          title: bookinfo[0],
-          comment: bookinfo[1],
+          userid: user.id,
+          name: user.name,
+          books: user.books,
+          skills: user.skills.split(","),
         };
       });
-      return {
-        userid: user.id,
-        name: user.name,
-        books: book,
-        skills: user.skills.split(","),
-      };
-    });
 
     const skill_sql = "SELECT * FROM skill;";
     var skills = await doQuery(skill_sql);
@@ -108,7 +115,7 @@ function check_input(json_data) {
     }
   });
 
-  return false;
+  return true;
 }
 
 module.exports = router;
