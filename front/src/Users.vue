@@ -168,7 +168,15 @@ import axios from 'axios'
         deleteUser: function(id, name){
           if (window.confirm(name + "のデータを削除します。よろしいですか？")){
             // 削除処理を実行する。
-            alert("ユーザID:" + id + "の削除するSQLをバックエンド側で実行する。")
+            axios.delete('http://localhost:3000/user',{
+                data:{ 
+                  id: id }
+            }).then(response => {
+              this.users = response.data.data.users;
+              this.allSkills = response.data.data.skills;
+              this.errorMessage = response.data.error.message;
+              alert(name + 'のユーザ削除が成功ました。');
+            })
           } else {
             // キャンセル時は何も行わない。
           }
