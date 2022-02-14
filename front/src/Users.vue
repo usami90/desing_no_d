@@ -13,26 +13,74 @@
           <th>社員名</th>
           <th>得意なスキル</th>
           <th>おススメの本</th>
+          <th>削除</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(user, index) in search_users" :key="index">
           <td v-html="highLight(user.name)"></td>
           <td>
-            <p  v-html="highLight(user.skills.join(','))">
+            <p v-html="highLight(user.skills.join(','))">
             </p>
           </td>
           <td>
-          <div  v-for="(book, index) in user.books" :key="index" >
-            <p v-html="highLight(book.title)">
-            </p>
+          <div v-for="(book, index) in user.books" :key="index" >
+            <p v-html="highLight(book.title)"></p>
             <p style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
             </p>
            </div> 
-          </td>    
+          </td>
+          <td><button v-on:click="deleteUser(user.userid, user.name)">削除</button></td>
         </tr>
       </tbody>
     </table>
+    <!-- 登録フォーム -->
+    <br><br>
+    <div>
+      ユーザー登録フォーム
+      <table>
+        <tr>
+          <td style="background-color:#EDF7FF">社員名*</td>
+          <td><input type="text" v-model="userName" placeholder="社員名"></td>
+        </tr>
+        <tr>
+          <td style="background-color:#EDF7FF">スキル</td>
+          <td>
+            <div v-for="(skill, index) in allSkills" :key="index" style="display: inline-block">
+              <input 
+              :id="skill + index"
+              type="checkbox"
+              :value="skill.name"
+              v-model="userSkills">
+              <label :for="skill.name">{{skill.name}}&nbsp;&nbsp;</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#EDF7FF">おススメの本１</td>
+          <td>
+            <p><input type="text" v-model="userBook1Title" placeholder="本のタイトル"></p>
+            <textarea rows="5" cols="80" v-model="userBook1Comment" placeholder="本のコメント、可能なら難易度や社内にその本があるかどうかの情報も記載"/>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#EDF7FF">おススメの本２</td>
+          <td>
+            <p><input type="text" v-model="userBook2Title" placeholder="本のタイトル"></p>
+            <textarea rows="5" cols="80" v-model="userBook2Comment" placeholder="本のコメント、可能なら難易度や社内にその本があるかどうかの情報も記載"/>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color:#EDF7FF">おススメの本３</td>
+          <td>
+            <p><input type="text" v-model="userBook3Title" placeholder="本のタイトル"></p>
+            <textarea rows="5" cols="80" v-model="userBook3Comment" placeholder="本のコメント、可能なら難易度や社内にその本があるかどうかの情報も記載"/>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <div align="right"><button v-on:click="addUser" align="right">登録</button></div>
+    </div>
   </div>
 </template>
 
@@ -47,7 +95,15 @@ import axios from 'axios'
         users: null,
         search: '',
         allSkills: null,
-        skillSearch: ''
+        skillSearch: '',
+        userName: '',
+        userSkills: [],
+        userBook1Title: '',
+        userBook1Comment: '',
+        userBook2Title: '',
+        userBook2Comment: '',
+        userBook3Title: '',
+        userBook3Comment: ''
       }
     },
 
@@ -65,6 +121,16 @@ import axios from 'axios'
           return text.replace(re,function(search){
             return '<span style="background-color:yellow;font-weight:bold">'+ search + '</span>'})
         },
+        addUser: function() {
+          alert(this.userSkills)
+      }, deleteUser: function(id, name){
+          if (window.confirm(name + "のデータを削除します。よろしいですか？")){
+            // 削除処理を実行する。
+            alert("ユーザID:" + id + "の削除するSQLをバックエンド側で実行する。")
+          } else {
+            // キャンセル時は何も行わない。
+          }
+      }
       },
 
     // 算出プロパティの設定
