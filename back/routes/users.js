@@ -69,13 +69,13 @@ router.post("/", (req, res, next) => {
 /* 入力条件のチェック */
 function check_input(json_data){
   // ユーザー名が空
-  if(json_data.name == "" || json_data.name == null){
+  if(json_data.name == null || json_data.name == ""){
     throw 'ユーザー名が入力されていません。';
   };
 
   // 本のタイトルが空で、コメントあり
   json_data.books.map( (book) => {
-    if (book.comment != "" && (book.title == "" || book.title == null)){
+    if (book.comment != "" && (book.title == null || book.title == "")){
       throw '本のタイトルが入力されていません。';
     }
   })
