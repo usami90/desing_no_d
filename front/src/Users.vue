@@ -24,10 +24,10 @@
             </p>
           </td>
           <td>
-          <div v-for="(book, index) in user.books" :key="index" >
-            <p v-html="highLight(book.title)"></p>
-            <p style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
-            </p>
+          <div style="margin-bottom:20px" v-for="(book, index) in user.books" :key="index" >
+            <span>書籍名：【</span><span v-html="highLight(book.title)"></span><span>】</span><br/>
+            <span style="background-color:#EDF7FF; text-indent:1em "> {{book.comment}}
+            </span>
            </div> 
           </td>
           <td><button v-on:click="deleteUser(user.userid, user.name)">削除</button></td>
