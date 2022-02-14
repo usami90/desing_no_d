@@ -159,8 +159,7 @@ import axios from 'axios'
     },
 
     mounted() {
-      // axios.get('http://localhost:3000')
-      axios.post('http://localhost:3000/user')
+      axios.get('http://localhost:3000')
       .then(response => {
           this.users = response.data.data.users;
           this.allSkills = response.data.data.skills;
