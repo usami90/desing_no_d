@@ -81,7 +81,6 @@ router.delete("/", (req, res, next) => {
 
     var error_message = null;
 
-    /* 入力条件のチェック */
     try {
       /* SQL文の作成 */
       const user_add_sql =
@@ -89,7 +88,7 @@ router.delete("/", (req, res, next) => {
         data.id +
         ";";
 
-      // ユーザーの登録
+      // ユーザーの削除
       await doQuery(user_add_sql);
 
     } catch (err) {
