@@ -172,10 +172,12 @@ import axios from 'axios'
                 data:{ 
                   id: id }
             }).then(response => {
-              this.users = response.data.data.users;
-              this.allSkills = response.data.data.skills;
-              this.errorMessage = response.data.error.message;
-              alert(name + 'のユーザ削除が成功ました。');
+              if(this.errorMessage == null || this.errorMessage == ""){
+                this.users = response.data.data.users;
+                this.allSkills = response.data.data.skills;
+                this.errorMessage = response.data.error.message;
+                alert(name + 'のユーザ削除が成功ました。');
+              }
             })
           } else {
             // キャンセル時は何も行わない。
