@@ -79,8 +79,11 @@
         </tr>
       </table>
       <br>
+      
       <div align="right"><button v-on:click="addUser" align="right">登録</button></div>
     </div>
+
+ <div style="background-color:#ffc0cb; margin-top:30px" v-if="this.errorMessage!==null">{{this.errorMessage}}</div>
   </div>
 </template>
 
@@ -103,7 +106,8 @@ import axios from 'axios'
         userBook2Title: '',
         userBook2Comment: '',
         userBook3Title: '',
-        userBook3Comment: ''
+        userBook3Comment: '',
+        errorMessage:''
       }
     },
 
