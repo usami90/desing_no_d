@@ -14,7 +14,7 @@ router.post("/", (req, res, next) => {
 
     /* 入力条件のチェック */
     try {
-      check_input(data);
+      await check_input(data);
 
       /* SQL文の作成 */
       const user_add_sql =
@@ -31,8 +31,7 @@ router.post("/", (req, res, next) => {
 
     } catch (err) {
       console.log("---------- Error ----------");
-      // console.log(err);
-      console.log("SQL: " + user_add_sql);
+      console.log(err);
       console.log("Data: ");
       console.log(data);
       error_message = err;
